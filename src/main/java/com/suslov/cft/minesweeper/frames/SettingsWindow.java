@@ -1,5 +1,6 @@
 package com.suslov.cft.minesweeper.frames;
 
+import com.suslov.cft.minesweeper.exceptions.GameException;
 import com.suslov.cft.minesweeper.frames.enums.GameType;
 import com.suslov.cft.minesweeper.frames.listeners.GameTypeListener;
 
@@ -22,10 +23,10 @@ public class SettingsWindow extends JDialog {
         Container contentPane = getContentPane();
         contentPane.setLayout(layout);
 
-        int gridY = 0;
-        contentPane.add(createRadioButton("Novice (10 mines, 9х9)", GameType.NOVICE, layout, gridY++));
-        contentPane.add(createRadioButton("Medium (40 mines, 16х16)", GameType.MEDIUM, layout, gridY++));
-        contentPane.add(createRadioButton("Expert (99 mines, 16х30)", GameType.EXPERT, layout, gridY++));
+        int gridY = -1;
+        contentPane.add(createRadioButton("Novice (10 mines, 9х9)", GameType.NOVICE, layout, ++gridY));
+        contentPane.add(createRadioButton("Medium (40 mines, 16х16)", GameType.MEDIUM, layout, ++gridY));
+        contentPane.add(createRadioButton("Expert (99 mines, 16х30)", GameType.EXPERT, layout, ++gridY));
 
         contentPane.add(createOkButton(layout));
         contentPane.add(createCloseButton(layout));
@@ -41,13 +42,12 @@ public class SettingsWindow extends JDialog {
 
     public void setGameType(GameType gameType) {
         JRadioButton radioButton = radioButtonsMap.get(gameType);
-
         if (radioButton == null) {
-            throw new UnsupportedOperationException("Unknown game type: " + gameType);
+            throw new GameException("Unknown game type installed: " + gameType);
         }
+        radioGroup.setSelected(radioButton.getModel(), true);
 
         this.gameType = gameType;
-        radioGroup.setSelected(radioButton.getModel(), true);
     }
 
     public void setGameTypeListener(GameTypeListener gameTypeListener) {
@@ -79,21 +79,12 @@ public class SettingsWindow extends JDialog {
         okButton.setPreferredSize(new Dimension(80, 25));
         okButton.addActionListener(e -> {
             dispose();
-
             if (gameTypeListener != null) {
                 gameTypeListener.onGameTypeChanged(gameType);
             }
         });
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.EAST;
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.5;
-        gbc.insets = new Insets(15, 0, 0, 0);
-        layout.setConstraints(okButton, gbc);
+        layout.setConstraints(okButton, createGridBagConstraints(GridBagConstraints.EAST, 1, 0));
 
         return okButton;
     }
@@ -103,16 +94,21 @@ public class SettingsWindow extends JDialog {
         cancelButton.setPreferredSize(new Dimension(80, 25));
         cancelButton.addActionListener(e -> dispose());
 
+        layout.setConstraints(cancelButton, createGridBagConstraints(GridBagConstraints.WEST, 2, 5));
+
+        return cancelButton;
+    }
+
+    private GridBagConstraints createGridBagConstraints(int gbcAnchor, int gridX, int leftInset) {
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.gridx = 2;
+        gbc.anchor = gbcAnchor;
+        gbc.gridx = gridX;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.5;
-        gbc.insets = new Insets(15, 5, 0, 0);
-        layout.setConstraints(cancelButton, gbc);
+        gbc.insets = new Insets(15, leftInset, 0, 0);
 
-        return cancelButton;
+        return gbc;
     }
 }

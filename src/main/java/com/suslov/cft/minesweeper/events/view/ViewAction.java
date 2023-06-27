@@ -1,4 +1,4 @@
-package com.suslov.cft.minesweeper.events;
+package com.suslov.cft.minesweeper.events.view;
 
 import com.suslov.cft.minesweeper.frames.enums.ButtonType;
 import com.suslov.cft.minesweeper.frames.enums.GameType;
@@ -26,8 +26,11 @@ public final class ViewAction {
         private int x;
         private int y;
         private ButtonType buttonType;
+
         private GameType gameType;
+
         private String winnerName;
+
         private ActionEvent event;
 
         public Content(int x, int y, ButtonType buttonType) {
@@ -36,12 +39,12 @@ public final class ViewAction {
             this.buttonType = buttonType;
         }
 
-        public Content(String winnerName) {
-            this.winnerName = winnerName;
-        }
-
         public Content(GameType gameType) {
             this.gameType = gameType;
+        }
+
+        public Content(String winnerName) {
+            this.winnerName = winnerName;
         }
 
         public Content(ActionEvent event) {

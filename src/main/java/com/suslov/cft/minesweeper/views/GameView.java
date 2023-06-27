@@ -1,8 +1,8 @@
 package com.suslov.cft.minesweeper.views;
 
-import com.suslov.cft.minesweeper.events.GameAction;
-import com.suslov.cft.minesweeper.events.ViewAction;
-import com.suslov.cft.minesweeper.events.ViewActionType;
+import com.suslov.cft.minesweeper.events.game.GameAction;
+import com.suslov.cft.minesweeper.events.view.ViewAction;
+import com.suslov.cft.minesweeper.events.view.ViewActionType;
 import com.suslov.cft.minesweeper.frames.*;
 import com.suslov.cft.minesweeper.highscores.Record;
 import com.suslov.cft.minesweeper.models.FieldSettings;
@@ -13,8 +13,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.suslov.cft.minesweeper.frames.enums.GameType.*;
 
 public class GameView implements ViewInterface, GameObserver, RecordObserver, ViewObservable {
     private final List<ViewObserver> observers = new ArrayList<>();

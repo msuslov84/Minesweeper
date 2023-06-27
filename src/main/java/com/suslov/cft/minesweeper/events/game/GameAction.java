@@ -1,38 +1,35 @@
-package com.suslov.cft.minesweeper.events;
+package com.suslov.cft.minesweeper.events.game;
 
-import com.suslov.cft.minesweeper.frames.enums.GameType;
 import com.suslov.cft.minesweeper.models.FieldSettings;
 import com.suslov.cft.minesweeper.to.CellTo;
 
 public final class GameAction {
-    private final Content content;
+
     private final GameActionType type;
+    private final Content content;
 
     public GameAction(GameActionType type, Content content) {
-        this.content = content;
         this.type = type;
-    }
-
-    public Content getContent() {
-        return content;
+        this.content = content;
     }
 
     public GameActionType type() {
         return type;
     }
 
+    public Content getContent() {
+        return content;
+    }
+
     public static class Content {
         private CellTo cellTo;
+
         private FieldSettings settings;
+
         private int timerValue;
         private int remainderMines;
-        private GameType gameType;
-        private boolean bestResult;
 
-        public Content(GameType gameType, boolean bestResult) {
-            this.gameType = gameType;
-            this.bestResult = bestResult;
-        }
+        private boolean bestResult;
 
         public Content(CellTo cellTo) {
             this.cellTo = cellTo;
@@ -49,6 +46,10 @@ public final class GameAction {
             }
         }
 
+        public Content(boolean bestResult) {
+            this.bestResult = bestResult;
+        }
+
         public CellTo getCellTo() {
             return cellTo;
         }
@@ -63,10 +64,6 @@ public final class GameAction {
 
         public int getRemainderMines() {
             return remainderMines;
-        }
-
-        public GameType getGameType() {
-            return gameType;
         }
 
         public boolean isBestResult() {

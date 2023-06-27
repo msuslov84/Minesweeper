@@ -16,8 +16,7 @@ public enum GameImage {
     NUM_8("8.png"),
     BOMB("mine.png"),
     TIMER("timer.png"),
-    BOMB_ICON("mineImage.png"),
-    ;
+    BOMB_ICON("mineImage.png");
 
     private final String fileName;
     private ImageIcon imageIcon;
@@ -30,7 +29,6 @@ public enum GameImage {
         if (imageIcon == null) {
             imageIcon = new ImageIcon(ClassLoader.getSystemResource("/img/" + fileName));
         }
-
         return imageIcon;
     }
 }

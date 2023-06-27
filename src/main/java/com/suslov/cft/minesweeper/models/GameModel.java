@@ -1,7 +1,8 @@
 package com.suslov.cft.minesweeper.models;
 
-import com.suslov.cft.minesweeper.events.GameAction;
-import com.suslov.cft.minesweeper.events.GameActionType;
+import com.suslov.cft.minesweeper.events.game.GameAction;
+import com.suslov.cft.minesweeper.events.game.GameAction.Content;
+import com.suslov.cft.minesweeper.events.game.GameActionType;
 import com.suslov.cft.minesweeper.exceptions.CoordinateException;
 import com.suslov.cft.minesweeper.frames.enums.GameType;
 import com.suslov.cft.minesweeper.highscores.Record;
@@ -110,7 +111,7 @@ public class GameModel implements ModelInterface, GameObservable {
     }
 
     private void sendStartNotificationToObservers() {
-        GameAction restartAction = new GameAction(GameActionType.RESTART, new GameAction.Content(fieldSettings));
+        GameAction restartAction = new GameAction(GameActionType.RESTART, new Content(fieldSettings));
         notifyObservers(restartAction);
     }
 
@@ -196,7 +197,7 @@ public class GameModel implements ModelInterface, GameObservable {
     }
 
     private void sendWinNotificationToObservers(boolean bestResult) {
-        GameAction action = new GameAction(GameActionType.WIN, new GameAction.Content(gameType, bestResult));
+        GameAction action = new GameAction(GameActionType.WIN, new Content(bestResult));
         notifyObservers(action);
     }
 
@@ -260,12 +261,12 @@ public class GameModel implements ModelInterface, GameObservable {
     }
 
     private void sendCellNotificationToObservers(GameActionType type, Cell cell) {
-        GameAction action = new GameAction(type, new GameAction.Content(CellsUtil.createTo(cell)));
+        GameAction action = new GameAction(type, new Content(CellsUtil.createTo(cell)));
         notifyObservers(action);
     }
 
     private void sendCounterNotificationToObservers(GameActionType type, int counter) {
-        GameAction action = new GameAction(type, new GameAction.Content(type, counter));
+        GameAction action = new GameAction(type, new Content(type, counter));
         notifyObservers(action);
     }
 

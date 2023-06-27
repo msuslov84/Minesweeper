@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
     private JLabel bombsCounterLabel;
 
     public MainWindow() {
-        super("Miner");
+        super("Minesweeper");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 

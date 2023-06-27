@@ -1,6 +1,6 @@
 package com.suslov.cft.minesweeper.controllers;
 
-import com.suslov.cft.minesweeper.events.ViewAction;
+import com.suslov.cft.minesweeper.events.view.ViewAction;
 
 public interface Controller {
 

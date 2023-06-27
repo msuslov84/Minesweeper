@@ -1,7 +1,7 @@
 package com.suslov.cft.minesweeper.controllers;
 
-import com.suslov.cft.minesweeper.events.ViewAction;
-import com.suslov.cft.minesweeper.events.ViewAction.Content;
+import com.suslov.cft.minesweeper.events.view.ViewAction;
+import com.suslov.cft.minesweeper.events.view.ViewAction.Content;
 import com.suslov.cft.minesweeper.exceptions.CoordinateException;
 import com.suslov.cft.minesweeper.exceptions.HighscoreException;
 import com.suslov.cft.minesweeper.highscores.Record;

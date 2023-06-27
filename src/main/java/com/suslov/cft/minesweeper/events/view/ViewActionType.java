@@ -1,4 +1,4 @@
-package com.suslov.cft.minesweeper.events;
+package com.suslov.cft.minesweeper.events.view;
 
 public enum ViewActionType {
     CLICK,
