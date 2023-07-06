@@ -19,8 +19,8 @@ public class GameView implements ViewInterface, GameObserver, RecordObserver, Vi
     private final MainWindow mainWindow;
     private final SettingsWindow settingsWindow;
     private final HighScoresWindow highScoresWindow;
-    private final LoseWindow loseWindow;
-    private final WinWindow winWindow;
+    private final ResultWindow loseWindow;
+    private final ResultWindow winWindow;
     private final RecordsWindow recordsWindow;
 
     public GameView(FieldSettings settings, GameObservable model, RecordObservable records) {

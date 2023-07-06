@@ -3,7 +3,7 @@ package com.suslov.cft.minesweeper.models;
 import com.suslov.cft.minesweeper.exceptions.GameException;
 import com.suslov.cft.minesweeper.frames.enums.GameType;
 
-public interface ModelInterface {
+public interface Model {
 
     void startGame();
 

@@ -6,7 +6,7 @@ import com.suslov.cft.minesweeper.exceptions.CoordinateException;
 import com.suslov.cft.minesweeper.exceptions.HighscoreException;
 import com.suslov.cft.minesweeper.highscores.Record;
 import com.suslov.cft.minesweeper.highscores.Highscore;
-import com.suslov.cft.minesweeper.models.ModelInterface;
+import com.suslov.cft.minesweeper.models.Model;
 import com.suslov.cft.minesweeper.observers.ViewObservable;
 import com.suslov.cft.minesweeper.observers.ViewObserver;
 
@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 public class GameController implements Controller, ViewObserver {
     public static final Logger LOG = Logger.getLogger(GameController.class.getName());
 
-    private final ModelInterface game;
+    private final Model game;
     private final Highscore records;
 
-    public GameController(ModelInterface game, ViewObservable view, Highscore records) {
+    public GameController(Model game, ViewObservable view, Highscore records) {
         this.game = game;
         this.records = records;
         view.addObserver(this);

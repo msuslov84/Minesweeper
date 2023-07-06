@@ -1,8 +1,10 @@
 package com.suslov.cft.minesweeper.models;
 
 public class Cell {
+
     private final int x;
     private final int y;
+
     private State state = State.CLOSED;
     private boolean isMine;
     private int countMinesAround;

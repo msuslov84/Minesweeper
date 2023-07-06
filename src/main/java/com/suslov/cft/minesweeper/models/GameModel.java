@@ -14,7 +14,7 @@ import com.suslov.cft.minesweeper.util.CellsUtil;
 import java.util.*;
 import java.util.logging.Logger;
 
-public class GameModel implements ModelInterface, GameObservable {
+public class GameModel implements Model, GameObservable {
     public static final Logger LOG = Logger.getLogger(GameModel.class.getName());
 
     private final List<GameObserver> observers = new ArrayList<>();
@@ -22,15 +22,15 @@ public class GameModel implements ModelInterface, GameObservable {
 
     private GameType gameType;
     private Timer timer;
-    private int timerValue;
-    private Cell[][] field;
     private FieldSettings fieldSettings;
     private Highscore records;
+    private Cell[][] field;
     private int width;
     private int height;
     private int numberMines;
     private int notMarkedMines;
     private int numberMarkedFlags;
+    private int timerValue;
     private boolean firstStep;
     private boolean gameOver;
 
@@ -124,11 +124,9 @@ public class GameModel implements ModelInterface, GameObservable {
         }
 
         handleCellOpening(cell);
-
         if (checkVictoryConditions(cell)) {
             return;
         }
-
         checkNeighbourCellsRecursively(cell);
     }
 
@@ -193,7 +191,7 @@ public class GameModel implements ModelInterface, GameObservable {
     }
 
     private boolean isWin() {
-        return numberMines == numberMarkedFlags;
+        return notMarkedMines == 0 && numberMines == numberMarkedFlags;
     }
 
     private void sendWinNotificationToObservers(boolean bestResult) {
@@ -257,6 +255,11 @@ public class GameModel implements ModelInterface, GameObservable {
                 sendCounterNotificationToObservers(GameActionType.MINE, ++notMarkedMines);
                 numberMarkedFlags--;
             }
+        }
+        if (isWin()) {
+            LOG.info("<<< The game is ended. Player won!\n");
+            Record record = new Record(gameType, timerValue);
+            sendWinNotificationToObservers(records.isBestResult(record));
         }
     }
 

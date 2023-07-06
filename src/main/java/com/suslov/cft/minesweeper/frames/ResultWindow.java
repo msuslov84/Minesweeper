@@ -51,37 +51,42 @@ public abstract class ResultWindow extends JDialog {
     }
 
     private JButton createNewGameButton(GridBagLayout layout) {
-        JButton newGameButton = createNewButton("New game", newGameListener);
-        layout.setConstraints(newGameButton, createGridBagConstraints(GridBagConstraints.EAST, 0));
+        JButton newGameButton = createNewButton("New game");
+        newGameButton.addActionListener(e -> {
+            dispose();
+            if (newGameListener != null) {
+                newGameListener.actionPerformed(e);
+            }
+        });
+        layout.setConstraints(newGameButton, createGridBagConstraints(GridBagConstraints.EAST, 0, 0));
 
         return newGameButton;
     }
 
     private JButton createExitButton(GridBagLayout layout) {
-        JButton exitButton = createNewButton("Exit", exitListener);
-        layout.setConstraints(exitButton, createGridBagConstraints(GridBagConstraints.WEST, 5));
+        JButton exitButton = createNewButton("Exit");
+        exitButton.addActionListener(e -> {
+            dispose();
+            if (exitListener != null) {
+                exitListener.actionPerformed(e);
+            }
+        });
+        layout.setConstraints(exitButton, createGridBagConstraints(GridBagConstraints.WEST, 1, 5));
 
         return exitButton;
     }
 
-    private JButton createNewButton(String text, ActionListener listener) {
+    private JButton createNewButton(String text) {
         JButton button = new JButton(text);
         button.setPreferredSize(new Dimension(100, 25));
-
-        button.addActionListener(e -> {
-            dispose();
-            if (listener != null) {
-                listener.actionPerformed(e);
-            }
-        });
 
         return button;
     }
 
-    private GridBagConstraints createGridBagConstraints(int gbcAnchor, int leftInset) {
+    private GridBagConstraints createGridBagConstraints(int gbcAnchor, int gridX, int leftInset) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = gbcAnchor;
-        gbc.gridx = 1;
+        gbc.gridx = gridX;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;

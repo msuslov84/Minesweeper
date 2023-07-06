@@ -9,6 +9,7 @@ public class Record implements Comparable<Record> {
 
     private final GameType gameType;
     private final int timeValue;
+
     private String winnerName;
 
     public Record(GameType gameType, String winnerName, int timeValue) {
